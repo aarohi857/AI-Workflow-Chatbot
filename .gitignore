@@ -1,0 +1,28 @@
+# --- Security (API Keys and Sensitive Data) ---
+.env
+.envrc
+
+# --- Python Environment & Caches ---
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+ENV/
+.venv/
+
+# --- Editor & IDE Settings ---
+.vscode/
+.idea/
+.cursorignore
+.editorconfig
+.prettierrc
+
+# --- Project Specific Data & Logs ---
+data/
+*.log
+pip-log.txt
+
+# --- OS Specific Files ---
+.DS_Store
+Thumbs.db
