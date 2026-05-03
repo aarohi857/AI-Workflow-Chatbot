@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELVIA AI - Neural Interface</title>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Professional Markdown & Code Highlighting -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- Dynamic Graphing Engine -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Michroma&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="overflow-hidden bg-transparent text-white font-inter">
+    <!-- Deep Space Glowing Orbs -->
+    <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-purple-900/20 blur-[150px] pointer-events-none z-[-2] animate-pulse-slow"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-cyan-900/10 blur-[150px] pointer-events-none z-[-2] animate-pulse-slow"></div>
+    <div class="neon-grid"></div>
+
+    <!-- STAGE 1: Selection Screen -->
+    <div id="avatarPage" class="min-h-screen flex flex-col items-center justify-center p-6 transition-all duration-700">
+        <div class="text-center mb-16 relative z-10">
+            <h1 class="text-7xl font-bold tracking-tighter italic glitch-effect" style="min-height: 80px;">
+                <span id="typing-text"></span><span class="animate-pulse text-purple-500">|</span>
+            </h1>
+            <p class="text-gray-500 text-[10px] tracking-[0.5em] uppercase mt-2">Autonomous Intelligence Suite</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-20">
+            <div onclick="showIntro('zenvix')" class="group cursor-pointer text-center">
+                <div class="relative h-80 w-80 flex items-center justify-center">
+                    <div class="hologram-stand ring-zenvix"></div>
+                    <img src="{{ url_for('static', filename='images/zenvix_bot.png') }}" class="w-64 z-10 floating zenvix-glow">
+                </div>
+                <h3 class="text-3xl font-bold mt-6 group-hover:text-purple-400 transition">ZENVIX</h3>
+                <p class="text-purple-400 font-mono text-[10px] uppercase tracking-widest mt-2 animate-pulse glow-text-purple">Technical Architect</p>
+            </div>
+            <div onclick="showIntro('aarvix')" class="group cursor-pointer text-center">
+                <div class="relative h-80 w-80 flex items-center justify-center">
+                    <div class="hologram-stand ring-aarvix"></div>
+                    <img src="{{ url_for('static', filename='images/aarvix_bot.png') }}" class="w-64 z-10 floating aarvix-glow">
+                </div>
+                <h3 class="text-3xl font-bold mt-6 group-hover:text-cyan-400 transition">AARVIX</h3>
+                <p class="text-cyan-400 font-mono text-[10px] uppercase tracking-widest mt-2 animate-pulse glow-text-cyan">Insights Partner</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- STAGE 2: Intro Page -->
+    <div id="introPage" class="hidden min-h-screen flex items-center justify-center bg-transparent p-10 transition-opacity duration-1000">
+        <div class="intro-glass max-w-6xl w-full flex flex-col md:flex-row items-center p-16 gap-20 bg-black/30 backdrop-blur-sm border border-white/10 rounded-[40px] shadow-[0_20px_80px_rgba(0,0,0,0.6)] relative overflow-hidden">
+            <!-- Subtle internal glow -->
+            <div id="introCardGlow" class="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[2px] blur-[2px] bg-purple-500/50"></div>
+            
+            <div class="w-full md:w-1/2 flex justify-center items-center relative h-[450px]">
+                <div class="relative scale-150">
+                    <div id="introStand" class="hologram-stand"></div>
+                    <img id="introBotImg" src="" class="w-64 z-10 floating">
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 space-y-8 text-left z-10">
+                <h2 id="introName" class="text-8xl font-bold tracking-tighter italic font-michroma opacity-0"></h2>
+                <div id="introLine" class="h-[6px] w-24 rounded-full opacity-0"></div>
+                <p id="introBio" class="text-gray-300 leading-relaxed text-xl font-light opacity-0"></p>
+                <button id="introBtn" onclick="startNeuralLink()" class="px-12 py-5 bg-white text-black font-bold uppercase rounded-full transition-all shadow-xl active:scale-95 opacity-0 mt-8 font-space">
+                    Initialize Neural Link
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- STAGE 3: Main Chat Interface -->
+    <div id="chatPage" class="hidden h-screen flex flex-col p-4 md:p-6 relative">
+        <div class="scanline"></div>
+        <div class="flex flex-1 overflow-hidden border border-white/10 rounded-[32px] shadow-2xl bg-black/20 relative z-10">
+            
+            <!-- Sidebar -->
+            <aside class="w-80 border-r border-white/10 p-6 flex flex-col bg-black/20" id="sidebar">
+                <div class="flex flex-col items-center mb-8">
+                    <div class="relative mb-4 h-40 w-40 flex items-center justify-center scale-75">
+                        <div class="hologram-stand ring-zenvix scale-50" id="sidebarRing"></div>
+                        <img id="sidebarAvatarIcon" src="" class="w-32 z-10 floating">
+                    </div>
+                    <h3 id="sidebarName" class="text-2xl font-bold tracking-widest font-michroma"></h3>
+                </div>
+
+                <div class="space-y-6 mt-4">
+                    <div>
+                        <div class="flex justify-between text-[10px] uppercase text-gray-500 mb-1">Neural Load</div>
+                        <div class="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-purple-500 w-[65%] animate-pulse"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-[10px] uppercase text-gray-500 mb-1">Sync Rate</div>
+                        <div class="h-1 bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-cyan-500 w-[82%]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Neural History Section -->
+                <div class="mt-6 flex-1 overflow-y-auto custom-scrollbar min-h-[100px]">
+                    <div class="text-[10px] uppercase text-gray-500 mb-2">Neural History</div>
+                    <div id="neuralHistory" class="space-y-2 pr-2"></div>
+                </div>
+
+                <nav class="mt-auto space-y-4 pt-4 border-t border-white/10">
+                    <button onclick="newSession()" class="w-full py-3 border border-white/10 rounded-xl text-[10px] uppercase tracking-widest hover:bg-white/5 transition">New Connection</button>
+                    <button onclick="switchAvatarMenu()" class="w-full py-3 bg-white/5 rounded-xl text-[10px] uppercase tracking-widest hover:bg-white/10 transition">Switch Architect</button>
+                    <!-- 3. Export Session & 6. Theme Switch -->
+                    <div class="flex gap-2">
+                        <button onclick="exportNeuralLog()" class="w-1/2 py-3 bg-white/5 rounded-xl text-[10px] uppercase tracking-widest hover:bg-white/10 transition" title="Export Session"><i class="fas fa-download"></i></button>
+                        <button onclick="toggleNeonTheme()" class="w-1/2 py-3 bg-white/5 rounded-xl text-[10px] uppercase tracking-widest hover:bg-white/10 transition" title="Toggle Theme"><i class="fas fa-adjust"></i></button>
+                    </div>
+                </nav>
+            </aside>
+
+            <!-- Chat Area -->
+            <main class="flex-1 flex flex-col p-6 overflow-hidden">
+                <div class="flex-1 overflow-y-auto space-y-6 pr-4 custom-scrollbar" id="messagesContainer"></div>
+                
+                <!-- 5. Quick Suggestions -->
+                <div id="suggestionBar" class="flex gap-2 overflow-x-auto custom-scrollbar pb-2 px-1 mt-2"></div>
+
+                <!-- Input Section with Voice and File Icons -->
+                <div class="mt-2 p-1 bg-white/5 border border-white/10 rounded-2xl flex items-center gap-3">
+                    
+                    <!-- Voice and File Buttons -->
+                    <button id="voiceBtn" onclick="toggleVoiceSync()" class="ml-4 text-gray-500 hover:text-purple-500 transition">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <input type="file" id="fileInp" class="hidden" onchange="handleFileUpload(this)">
+                    <button onclick="document.getElementById('fileInp').click()" class="text-gray-500 hover:text-white transition">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+
+                    <span class="text-purple-500 font-mono text-sm font-bold">VELVIA_CMD >></span>
+                    <input type="text" id="userInput" placeholder="Synthesize query..." class="flex-1 bg-transparent border-none focus:ring-0 text-sm py-4 text-white outline-none" onkeypress="if(event.key==='Enter') sendMessage()">
+                    
+                    <button onclick="sendMessage()" class="mr-2 w-10 h-10 bg-purple-600 hover:bg-purple-500 text-white rounded-xl transition flex items-center justify-center">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/charts_engine.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/features/pro_features.js') }}"></script>
+</body>
+</html>

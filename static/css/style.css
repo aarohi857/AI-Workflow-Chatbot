@@ -1,0 +1,449 @@
+/* --- COSMIC BACKGROUND & NEON GRID --- */
+body {
+    background: radial-gradient(circle at 50% 0%, #150f24 0%, #06040a 60%, #000000 100%) !important;
+    position: relative;
+    z-index: 0;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(1.5px 1.5px at 20px 30px, #ffffff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 40px 70px, #ffffff, rgba(0, 0, 0, 0)),
+        radial-gradient(1.5px 1.5px at 90px 40px, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 160px 120px, rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.4;
+    animation: moveStars 100s linear infinite;
+    z-index: -2;
+    pointer-events: none;
+}
+
+@keyframes moveStars {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-200px);
+    }
+}
+
+.neon-grid {
+    position: fixed;
+    bottom: -10%;
+    left: -50%;
+    width: 200%;
+    height: 50vh;
+    background-image:
+        linear-gradient(transparent 95%, rgba(157, 78, 221, 0.3) 100%),
+        linear-gradient(90deg, transparent 95%, rgba(157, 78, 221, 0.3) 100%);
+    background-size: 60px 60px;
+    transform: perspective(600px) rotateX(70deg);
+    transform-origin: top;
+    z-index: -1;
+    pointer-events: none;
+    animation: gridMove 3s linear infinite;
+}
+
+@keyframes gridMove {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 60px;
+    }
+}
+
+/* Rings & Holograms */
+.hologram-stand {
+    position: absolute;
+    bottom: 20px;
+    width: 200px;
+    height: 60px;
+    border-radius: 50%;
+    transform: rotateX(75deg);
+    opacity: 0.8;
+}
+
+@keyframes ringPulseZenvix {
+    0% {
+        box-shadow: 0 0 30px #9d4edd, inset 0 0 15px #9d4edd;
+        border-color: rgba(157, 78, 221, 0.6);
+    }
+
+    100% {
+        box-shadow: 0 0 80px #9d4edd, inset 0 0 40px #9d4edd;
+        border-color: rgba(157, 78, 221, 1);
+    }
+}
+
+@keyframes ringPulseAarvix {
+    0% {
+        box-shadow: 0 0 30px #00f2ff, inset 0 0 15px #00f2ff;
+        border-color: rgba(0, 242, 255, 0.6);
+    }
+
+    100% {
+        box-shadow: 0 0 80px #00f2ff, inset 0 0 40px #00f2ff;
+        border-color: rgba(0, 242, 255, 1);
+    }
+}
+
+.ring-zenvix {
+    border: 3px solid #9d4edd;
+    animation: ringPulseZenvix 2s infinite alternate ease-in-out;
+}
+
+.ring-aarvix {
+    border: 3px solid #00f2ff;
+    animation: ringPulseAarvix 2s infinite alternate ease-in-out;
+}
+
+/* Floating & Breathing Animations */
+.floating {
+    animation: float-breathe 6s ease-in-out infinite;
+}
+
+@keyframes float-breathe {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-15px) scale(1.03);
+    }
+}
+
+.zenvix-glow {
+    animation: auraPulseZenvix 2s infinite alternate ease-in-out;
+}
+
+@keyframes auraPulseZenvix {
+    0% { filter: drop-shadow(0 0 20px rgba(157, 78, 221, 0.7)); }
+    100% { filter: drop-shadow(0 0 70px rgba(157, 78, 221, 1)); }
+}
+
+.aarvix-glow {
+    animation: auraPulseAarvix 2s infinite alternate ease-in-out;
+}
+
+@keyframes auraPulseAarvix {
+    0% { filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.7)); }
+    100% { filter: drop-shadow(0 0 70px rgba(0, 242, 255, 1)); }
+}
+
+/* Glassmorphism Bubble */
+.chat-bubble-bot {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px 20px 20px 4px;
+}
+
+/* Sidebar Glows */
+.zenvix-active {
+    border-right: 2px solid rgba(157, 78, 221, 0.3) !important;
+}
+
+.aarvix-active {
+    border-right: 2px solid rgba(0, 242, 255, 0.3) !important;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(157, 78, 221, 0.3);
+    border-radius: 10px;
+}
+
+/* --- NEW CHANGES BELOW --- */
+
+/* Glitch Effect */
+@keyframes simple-glitch {
+
+    0%,
+    100% {
+        transform: translate(0);
+        text-shadow: 0 0 0 transparent;
+    }
+
+    2% {
+        transform: translate(-3px, 1px);
+        text-shadow: -2px 0 rgba(0, 242, 255, 0.8), 2px 0 rgba(157, 78, 221, 0.8);
+    }
+
+    4% {
+        transform: translate(3px, -1px);
+        text-shadow: 2px 0 rgba(0, 242, 255, 0.8), -2px 0 rgba(157, 78, 221, 0.8);
+    }
+
+    6%,
+    95% {
+        transform: translate(0);
+        text-shadow: 0 0 0 transparent;
+    }
+}
+
+.glitch-effect {
+    animation: simple-glitch 5s infinite;
+}
+
+/* Sub-title glow */
+.glow-text-purple {
+    text-shadow: 0 0 12px rgba(157, 78, 221, 0.8);
+}
+
+.glow-text-cyan {
+    text-shadow: 0 0 12px rgba(0, 242, 255, 0.8);
+}
+
+/* Scanline Animation */
+.scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, rgba(157, 78, 221, 0.15), transparent);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 50;
+    animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+    0% {
+        transform: translateY(-120px);
+    }
+
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+/* Staggered Slide Up Fade */
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slow background orb pulse */
+.animate-pulse-slow {
+    animation: slowPulse 8s infinite alternate ease-in-out;
+}
+
+@keyframes slowPulse {
+    0% {
+        opacity: 0.5;
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 0.9;
+        transform: scale(1.1);
+    }
+}
+
+/* Stage 2: Code Highlighting and Purple Headings */
+.prose {
+    line-height: 1.6;
+}
+
+.prose p {
+    margin-bottom: 15px;
+}
+
+.prose li {
+    margin-bottom: 0.5rem;
+}
+
+.prose ul,
+.prose ol {
+    padding-left: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.prose li::marker {
+    color: #9d4edd;
+    font-weight: bold;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+    color: #9d4edd !important;
+    /* Purple Font */
+    font-family: 'Michroma', sans-serif;
+    letter-spacing: 0.05em;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+/* Math Boxing */
+.katex-display {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(157, 78, 221, 0.2);
+    padding: 1rem;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    text-align: center;
+}
+
+pre {
+    background: #080808 !important;
+    border: 1px solid rgba(157, 78, 221, 0.2);
+    padding: 1.2rem;
+    border-radius: 12px;
+    position: relative;
+    margin: 1rem 0;
+}
+
+code {
+    color: #00f2ff !important;
+    /* Cyan Code */
+    font-family: 'monospace';
+}
+
+/* Voice Animation Feedback */
+.animate-pulse {
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+}
+
+/* --- THEME AND SEARCH STYLES --- */
+/* Theme Switcher - Comprehensive Light Mode Fix */
+body.light-theme {
+    background: #f8f9fa !important;
+    color: #2d2d2d !important;
+}
+
+body.light-theme::before {
+    display: none;
+    /* Hide stars for cleaner light background */
+}
+
+body.light-theme .neon-grid {
+    background-image:
+        linear-gradient(transparent 95%, rgba(157, 78, 221, 0.15) 100%),
+        linear-gradient(90deg, transparent 95%, rgba(157, 78, 221, 0.15) 100%);
+    opacity: 0.5;
+}
+
+body.light-theme .bg-\[\#05020d\] {
+    background-color: #f8f9fa !important;
+}
+
+body.light-theme .text-white {
+    color: #2d2d2d !important;
+}
+
+body.light-theme .bg-black\/20 {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .bg-black\/40 {
+    background-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+body.light-theme .border-white\/10,
+body.light-theme .border-white\/5 {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Chat Bubbles Light Mode */
+body.light-theme .chat-bubble-bot {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #2d2d2d;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-theme .bg-purple-600\/20 {
+    background-color: #f3e8ff !important;
+    border-color: #d8b4fe !important;
+    color: #2d2d2d !important;
+    box-shadow: 0 4px 12px rgba(157, 78, 221, 0.1) !important;
+}
+
+body.light-theme input {
+    color: #2d2d2d !important;
+}
+
+body.light-theme input::placeholder {
+    color: #6b7280 !important;
+}
+
+body.light-theme .text-gray-400,
+body.light-theme .text-gray-500,
+body.light-theme .text-gray-300 {
+    color: #4a4a4a !important;
+}
+
+body.light-theme .prose-invert {
+    color: #2d2d2d !important;
+}
+
+body.light-theme button,
+body.light-theme i {
+    color: #2d2d2d;
+}
+
+body.light-theme .bg-purple-600 i,
+body.light-theme .bg-cyan-500 i,
+body.light-theme .bg-purple-600,
+body.light-theme .bg-cyan-500 {
+    color: #ffffff !important;
+}
+
+body.light-theme .bg-white\/5 {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-theme .hover\:bg-white\/10:hover {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Search Highlight */
+.search-highlight {
+    background-color: rgba(234, 179, 8, 0.5);
+    color: #fff;
+    border-radius: 4px;
+    padding: 0 2px;
+}
